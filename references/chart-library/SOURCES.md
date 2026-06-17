@@ -23,21 +23,6 @@ Charts produced by `/strategy-deck-builder` using these patterns must be:
 
 Treat the catalog the way a designer would treat a competitor's portfolio: study the patterns, internalize the rules, build your own work. Never copy.
 
-## Indexed entries
-
-The full URL list is in `url-discovery.json`. Brief summary:
-
-| Date range | Issues indexed | Fully extracted |
-|---|---|---|
-| Nov 2025 | 8 | 8 |
-| Dec 2025 | 7 | 7 |
-| Jan 2026 | 9 | 0 |
-| Feb 2026 | 5 | 0 |
-| Mar 2026 | 5 | 0 |
-| Apr 2026 | 7 | 0 (except disease-burden ref) |
-
-The 15 fully extracted entries from Nov-Dec 2025 cover 13 distinct chart types — sufficient pattern diversity to define the v1 catalog. The 26 pending entries are stable URLs and can be top-up extracted in a future session.
-
 ## Citation example
 
 When a generated chart uses an insight derived from McKinsey research:
@@ -54,14 +39,3 @@ Source: [Your data source], [Year].
 ```
 
 No McKinsey citation is needed if the data is yours — only the *visual style* is borrowed, and visual styles aren't copyrightable.
-
-## Reproducibility
-
-To regenerate or expand this library:
-
-1. URL discovery via `WebSearch` with `site:mckinsey.com/featured-insights/week-in-charts` queries (note: capped at ~10 results per query, so use multiple keyword variations).
-2. For each URL, fetch the SSR'd HTML via `web_fetch`. Each page is ~50KB.
-3. Parse the `mck-u-sr-only` accessibility description for chart type + dimensions.
-4. Parse the `<h1>` for headline, `mdc-o-content-body` for subhead/body, `<picture>` source srcSet for SVGZ image URL.
-
-The structural parser is documented in `inventory.json`'s `extraction_notes` field.

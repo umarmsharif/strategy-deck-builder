@@ -7,9 +7,7 @@ A pattern catalog distilled from McKinsey's "Week in Charts" column. Plugged int
 ```
 chart-library/
 ├── README.md             ← this file
-├── inventory.json        ← structured catalog of source chart entries
-├── url-discovery.json    ← canonical URLs the inventory was built from
-├── SOURCES.md            ← citation list + copyright note
+├── SOURCES.md            ← citation + copyright note
 ├── SKILL_INTEGRATION.md  ← snippet to merge into strategy-deck-builder/SKILL.md
 └── patterns/             ← reusable chart pattern specs
     ├── 01-horizontal-bar-with-delta.md
@@ -22,13 +20,13 @@ chart-library/
 
 ## How the skill uses this
 
-When `/strategy-deck-builder` needs to generate a chart, it consults `inventory.json` to find the closest pattern match for the data shape, then loads the corresponding `patterns/*.md` to get the python-pptx recipe, headline conventions, color rules, and source-line format.
+When `/strategy-deck-builder` needs to generate a chart, it reads `patterns/00-shared-design-rules.md`, matches the data shape to one of the `patterns/*.md` specs, and uses that pattern's python-pptx recipe, headline conventions, color rules, and source-line format.
 
 The chart is built **from scratch** using python-pptx. McKinsey's chart images are NOT embedded — they are reference only.
 
 ## Coverage
 
-41 chart entries indexed (Nov 2025 — Apr 2026). 15 fully extracted with chart-type taxonomy and key numbers; 26 placeholders for top-up extraction in future sessions.
+Six reusable chart patterns covering the most common consulting chart types, distilled from the visual conventions of McKinsey's "Week in Charts" column. Each pattern is an original spec — anatomy, design rules, python-pptx recipe — not a copy of any source chart.
 
 ## Copyright
 

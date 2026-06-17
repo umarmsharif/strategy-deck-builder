@@ -14,8 +14,6 @@ strategy-deck-builder/
 ├── ... (existing skill files) ...
 └── chart-library/          ← drop in as-is
     ├── README.md
-    ├── inventory.json
-    ├── url-discovery.json
     ├── SOURCES.md
     ├── SKILL_INTEGRATION.md  ← this file (can delete after merge)
     └── patterns/
@@ -54,7 +52,7 @@ This skill includes a chart pattern library at `chart-library/`. Use it whenever
    | Two related metrics on different scales (count + rate) | `05-combined-bar-and-line.md` |
    | Same chart structure across 3–9 categories | `06-small-multiples.md` |
 
-   If unsure, look at `inventory.json` and find an entry whose `chart_type` and `dimensions_mentioned` match what you're building. The headline + accessibility description in that entry are real-world examples.
+   If unsure, default to the pattern whose "when to use" section best matches your data's shape and story; `00-shared-design-rules.md` plus each pattern's "when NOT to use" guardrails will confirm the fit.
 
 3. **Read the chosen pattern file in full.** Each pattern file has: when to use, anatomy diagram, design rules, python-pptx recipe, headline templates, source-line format, and "when NOT to use" guardrails.
 
@@ -86,7 +84,7 @@ If you used a McKinsey insight as the data origin, cite "McKinsey & Company, [re
 
 ### Copyright guardrail
 
-The chart-library catalog references McKinsey chart images (URLs in `inventory.json`) for *pattern study only*. Never:
+The chart-library patterns are distilled from McKinsey chart conventions for *pattern study only*. Never:
 - Embed McKinsey's chart images into a generated deck.
 - Copy specific McKinsey numbers/data into a chart unless the user is explicitly building a "based on McKinsey research" slide and citing it as such.
 - Reproduce McKinsey's exact headline wording — paraphrase to fit the user's voice.
@@ -102,11 +100,10 @@ If you want to make pattern selection more reliable, add this prompt as a subage
 
 ```
 Given a description of the data and the story:
-1. Read chart-library/inventory.json
-2. Read chart-library/patterns/00-shared-design-rules.md
-3. Pick the single best pattern (01-06) and explain in 2 sentences why
-4. Read that pattern's full .md file
-5. Generate the python-pptx code
+1. Read chart-library/patterns/00-shared-design-rules.md
+2. Pick the single best pattern (01-06) and explain in 2 sentences why
+3. Read that pattern's full .md file
+4. Generate the python-pptx code
 
 Return: { "pattern": "0X-name", "reasoning": "...", "code": "..." }
 ```
