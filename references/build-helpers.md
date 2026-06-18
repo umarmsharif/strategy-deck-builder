@@ -102,7 +102,14 @@ const DISPLAY = (typeof inputs !== "undefined" && inputs.brand && inputs.brand.f
 const DISPLAY_BOLD = T.displayBold, FONT = "Manrope";
 ```
 
-**Scalpel rule:** ACCENT used sparingly — one element per slide as the eye-landing point. Never fill large card areas with ACCENT. Use INK for dark cards. Use PANEL for light cards.
+**Scalpel rule:** ACCENT used sparingly — one element per slide as the eye-landing point. Never fill large card areas with ACCENT. Use `STRIP` for dark/emphasis fills; `PANEL` for light cards.
+
+**Dark-theme fills (one translation rule — applies to every recipe below).** Some recipes show an `INK` *fill* with `WH` text (emphasis strips, table/tier headers, dark cards, decision nodes) or an `ACCENT` *fill* with `WH`/`TINT` text (number badges, the closing band, chips). Those hardcodes break on the dark themes (`ink`, `midnight`), where `INK` is *light* text and the accents are light. The fix is mechanical — never fill with raw `INK`/`ACCENT` plus reversed `WH`/`TINT`; use the semantic tokens:
+- emphasis bar / table or tier header / dark card / decision node → `fill: STRIP`, text `ON_STRIP`. (Light themes: near-black bar, white text. Dark themes: it inverts to a light bar with dark text.)
+- anything filled with `ACCENT` → primary text `ON_ACCENT`, secondary text `ON_ACCENT_MUTE` (white on the dark accents; dark on Ink's teal and Midnight's gold).
+- muted / secondary bars → `MUTEFILL`, not a hardcoded grey.
+
+`INK` as *text* stays `INK`. On light themes these tokens equal the old values, so existing decks render identically — only the dark themes diverge. Wherever a recipe below still reads "INK fill / WH text", translate it through this rule.
 
 **v5 palette (June 2026):** the Bright White & Pine system replaces the v4 Burgundy & Brass family. The accent is now **client-variable**: it defaults to deep pine `12564A` when no `inputs.brand.primary_hex` is supplied (deliberately not the old burgundy, and not the purple/violet/cyan "AI palette"). Everything else is locked: a bright near-white ground, a single pine accent, and a configurable display font (default Charter) paired with Manrope body. Build.js constant names are unchanged for backward compatibility — only the hex values change. See `design_system.md` for the authoritative spec and `anti-slop.md` for the design-tell reversals.
 
@@ -122,7 +129,7 @@ Choosing the display+body pairing is the default anti-slop fix. Choosing Manrope
 | Section identity (divider) | DISPLAY (Step 1 brief; default Charter) | 40–54pt | Regular (DISPLAY_BOLD if all-sans) | INK |
 | Context line | Manrope | 13–14pt | Italic | ACCENT |
 | Section label | Manrope | 16pt | Bold | INK |
-| Table header | Manrope | 12–13.3pt | Bold | WH on INK fill |
+| Table header | Manrope | 12–13.3pt | Bold | `ON_STRIP` on `STRIP` fill (= WH on INK, light themes) |
 | Body text | Manrope | 10–12pt | Regular | BODY |
 | Breadcrumb (plain, tracked-caps) | Manrope | 10–11pt | Bold | ACCENT; charSpacing: 3 |
 | Page number (plain) | Manrope | 10–11pt | Regular | MUTE |
