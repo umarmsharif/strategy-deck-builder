@@ -283,7 +283,7 @@ CRIMSON CTA band top, 3–4 ask rows below with date pills. Always the last cont
 
 ## Visual primitives (extended)
 
-Eleven render-tested visual-grammar primitives (June 2026) distilled from The Grove's Group Graphics keyboard + the consulting primitive grid. Recipes in `build-helpers.md` §2.35–2.45; build + per-primitive previews in `references/visual-primitives/`. Decorative shapes from the same source (honeycomb, infinity loop, 3-D stacked planes, gradient spectrums) were deliberately not promoted — little analysis, and they trip `anti-slop.md`.
+Eleven render-tested visual-grammar primitives (June 2026) distilled from The Grove's Group Graphics keyboard + the consulting primitive grid. Recipes live in `build-helpers.md` (one per pattern, under the same names as the Pattern Index `id`s); build + per-primitive previews in `references/visual-primitives/`. Decorative shapes from the same source (honeycomb, infinity loop, 3-D stacked planes, gradient spectrums) were deliberately not promoted — little analysis, and they trip `anti-slop.md`.
 
 ### `layered-pyramid` — light
 Hierarchy of stacked layers, few-at-apex to many-at-base; the apex carries the accent.

@@ -1101,7 +1101,7 @@ s.addImage({ path: `icons/${name}.png`, x: p.x - 0.21, y: p.y - 0.21, w: 0.42, h
 
 ---
 
-### 2.35–2.45 Visual primitives (extended, June 2026)
+### Visual primitives (extended, June 2026)
 
 Eleven primitives distilled from the visual-grammar vocabulary (The Grove's Group Graphics keyboard + the consulting primitive grid), render-tested on the v5 system — working build and per-primitive previews in `references/visual-primitives/`. All assume the token block (§1.1) and `header()/title()/footer()/connector()` (§3). Decorative shapes from the same source — honeycomb, infinity loop, 3-D stacked planes, gradient spectrums — were deliberately NOT promoted: near-zero analytical payload, and they trip `anti-slop.md`.
 
