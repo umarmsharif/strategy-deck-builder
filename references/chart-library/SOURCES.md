@@ -15,7 +15,7 @@ This chart pattern library is distilled from McKinsey & Company's "The Week in C
 - Does NOT redistribute McKinsey's headlines, body text, or data.
 - Documents *patterns and conventions* observed across the catalog so original charts can be built in a similar visual language.
 
-Charts produced by `/strategy-deck-builder` using these patterns must be:
+Charts produced by `/ai-presentation-builder` using these patterns must be:
 
 1. **Built from the user's own data**, not McKinsey's data.
 2. **Original visual artwork**, generated via python-pptx using the pattern recipes — not embedded copies of McKinsey images.

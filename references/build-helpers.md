@@ -1,6 +1,6 @@
 # Design Pattern Knowledge Base — v5 Bright White & Pine
 
-# For: strategy-deck-builder skill
+# For: ai-presentation-builder skill
 
 # v5 (June 2026): rebuilt off v4 to remove AI-design tells — bright surface, serif+sans pairing, no one-side accent bars/pills/section numerals. See design_system.md and anti-slop.md.
 

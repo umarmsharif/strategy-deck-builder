@@ -1,6 +1,6 @@
 # McKinsey Chart Library
 
-A pattern catalog distilled from McKinsey's "Week in Charts" column. Plugged into `/strategy-deck-builder` so the skill can generate **original, editable** python-pptx charts in McKinsey's visual style.
+A pattern catalog distilled from McKinsey's "Week in Charts" column. Plugged into `/ai-presentation-builder` so the skill can generate **original, editable** python-pptx charts in McKinsey's visual style.
 
 ## What's in here
 
@@ -8,7 +8,7 @@ A pattern catalog distilled from McKinsey's "Week in Charts" column. Plugged int
 chart-library/
 ├── README.md             ← this file
 ├── SOURCES.md            ← citation + copyright note
-├── SKILL_INTEGRATION.md  ← snippet to merge into strategy-deck-builder/SKILL.md
+├── SKILL_INTEGRATION.md  ← snippet to merge into ai-presentation-builder/SKILL.md
 └── patterns/             ← reusable chart pattern specs
     ├── 01-horizontal-bar-with-delta.md
     ├── 02-dual-panel-bar.md
@@ -20,7 +20,7 @@ chart-library/
 
 ## How the skill uses this
 
-When `/strategy-deck-builder` needs to generate a chart, it reads `patterns/00-shared-design-rules.md`, matches the data shape to one of the `patterns/*.md` specs, and uses that pattern's python-pptx recipe, headline conventions, color rules, and source-line format.
+When `/ai-presentation-builder` needs to generate a chart, it reads `patterns/00-shared-design-rules.md`, matches the data shape to one of the `patterns/*.md` specs, and uses that pattern's python-pptx recipe, headline conventions, color rules, and source-line format.
 
 The chart is built **from scratch** using python-pptx. McKinsey's chart images are NOT embedded — they are reference only.
 

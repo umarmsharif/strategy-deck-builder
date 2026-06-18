@@ -1,5 +1,5 @@
 {
-  "name": "strategy-deck-builder",
+  "name": "ai-presentation-builder",
   "version": "1.0.0",
   "description": "A Claude skill that builds consulting-grade strategy decks with a v5 Bright White & Pine design system.",
   "license": "MIT",

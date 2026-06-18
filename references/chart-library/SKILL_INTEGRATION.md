@@ -1,15 +1,15 @@
-# Skill integration — `/strategy-deck-builder` + chart-library
+# Skill integration — `/ai-presentation-builder` + chart-library
 
-This file is the snippet to merge into `strategy-deck-builder/SKILL.md` so the skill consults the chart catalog whenever it generates a chart.
+This file is the snippet to merge into `ai-presentation-builder/SKILL.md` so the skill consults the chart catalog whenever it generates a chart.
 
 ---
 
 ## Where to put the chart-library folder
 
-Drop the entire `chart-library/` folder inside the strategy-deck-builder skill directory:
+Drop the entire `chart-library/` folder inside the ai-presentation-builder skill directory:
 
 ```
-strategy-deck-builder/
+ai-presentation-builder/
 ├── SKILL.md                ← edit this (see below)
 ├── ... (existing skill files) ...
 └── chart-library/          ← drop in as-is
@@ -30,7 +30,7 @@ strategy-deck-builder/
 
 ## Snippet to add into `SKILL.md`
 
-Insert the section below into `strategy-deck-builder/SKILL.md`, ideally right after your existing layout/typography rules and before the "Generate the deck" execution step.
+Insert the section below into `ai-presentation-builder/SKILL.md`, ideally right after your existing layout/typography rules and before the "Generate the deck" execution step.
 
 ```markdown
 ## Chart generation — McKinsey-styled, editable charts
@@ -70,7 +70,7 @@ The default chart-library palette is McKinsey deep blue `#051C2C`. To swap to th
 - Generate accent colors by lightening the primary (50% saturation, then 75%) for stacked-bar sequential palettes.
 - Keep gray `#9FA8B8` and white `#FFFFFF` for neutrals — those don't change.
 
-The strategy-deck-builder default brand colour is **v5 pine `12564A`**. Use that unless the user overrides.
+The ai-presentation-builder default brand colour is **v5 pine `12564A`**. Use that unless the user overrides.
 
 ### Source-line discipline
 

@@ -1,4 +1,4 @@
-# strategy-deck-builder
+# ai-presentation-builder
 
 A Claude skill that builds consulting-grade strategy decks — diagnostics, recommendations, roadmaps, market-entry analyses, board briefings, pitches — and renders them as editable PowerPoint.
 
@@ -34,15 +34,15 @@ npm run example          # → reference-build.pptx
 **Claude Code**
 
 ```bash
-git clone https://github.com/<your-username>/strategy-deck-builder.git ~/.claude/skills/strategy-deck-builder
-cd ~/.claude/skills/strategy-deck-builder && npm install
+git clone https://github.com/<your-username>/ai-presentation-builder.git ~/.claude/skills/ai-presentation-builder
+cd ~/.claude/skills/ai-presentation-builder && npm install
 ```
 
 Restart Claude Code (skills load at session start). Trigger it with "build me a deck", "make a strategy presentation", "turn this into a board deck", or just by describing a consulting deliverable.
 
 **claude.ai / Claude Desktop / Cowork**
 
-1. Download `strategy-deck-builder.zip` (or zip this folder yourself).
+1. Download `ai-presentation-builder.zip` (or zip this folder yourself).
 2. In Claude, open **Settings → Capabilities → Skills** and upload the zip.
 3. Start a chat and describe the deck you want. The skill activates on the same trigger phrases.
 
@@ -61,7 +61,7 @@ The skill asks the brief questions, shows you the ghost deck, and builds once yo
 ## What's inside
 
 ```
-strategy-deck-builder/
+ai-presentation-builder/
 ├── SKILL.md                         # the workflow: brief → ghost deck → build → QA → flight-check
 ├── assets/
 │   ├── inputs.example.json          # the deck schema, worked example

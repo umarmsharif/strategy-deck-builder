@@ -1,5 +1,5 @@
 {
-  "$schema_notes": "Schema for strategy-deck-builder. Top-level blocks: deck, theme, title_slide, slides[]. density was removed as a filter input; density tags remain on each pattern (metadata) but no longer narrow the picker. Slide volume + audience + archetype inform Claude's per-slide recommendation instead. This is a fictional example.",
+  "$schema_notes": "Schema for ai-presentation-builder. Top-level blocks: deck, theme, title_slide, slides[]. density was removed as a filter input; density tags remain on each pattern (metadata) but no longer narrow the picker. Slide volume + audience + archetype inform Claude's per-slide recommendation instead. This is a fictional example.",
 
   "deck": {
     "name": "Northwind-Activation-Review",

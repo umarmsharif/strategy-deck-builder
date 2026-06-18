@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * reference-build.js — a complete, render-tested pptxgenjs exemplar for the
- * strategy-deck-builder skill. It is the canonical implementation to copy blocks
+ * ai-presentation-builder skill. It is the canonical implementation to copy blocks
  * out of: it defines the v5 Bright White & Pine tokens, the three layout helpers
  * (header / title / footer), and six load-bearing slide patterns.
  *

@@ -1,10 +1,10 @@
 ---
-name: strategy-deck-builder
+name: ai-presentation-builder
 description: Build consulting-grade strategy decks, pitch decks, leadership briefings, and board presentations. Backed by a v5 Bright White & Pine design system (bright-white ground, deep-pine accent, a per-deck display font + Manrope body) built against an anti-slop catalogue, a 30+ pattern library, and chart-design guidance. Trigger for any consulting deliverable, case study, client pitch, roadmap, diagnostic, transformation plan, or market-entry analysis — even when the user does not name the skill. Configurable: slide count, output format (PPTX/HTML/MD), archetype (diagnostic/recommendation/roadmap/market-entry/transformation/pitch/scqa/scr/bluf/inductive/issue-tree/deductive), theme. Pairs with the flight-check sibling skill as the post-build review gate.
 compatibility: The deck builds via a Node/pptxgenjs pipeline, so the full build needs a code-execution environment (Claude Code, Cowork, or claude.ai with the analysis tool) plus `pptxgenjs` (npm i pptxgenjs). LibreOffice/soffice enables the render-QA loop; if it is absent, deliver the .pptx without the PNG preview pass. AskUserQuestion is recommended for the brief and ghost-deck gates; where it is unavailable, ask the same questions inline. In an environment with no code execution, the skill degrades gracefully to the ghost-deck outline + per-slide spec, which the user renders in PowerPoint, Google Slides, or Gamma.
 ---
 
-# strategy-deck-builder
+# ai-presentation-builder
 
 A skill for building consulting-grade decks, anchored on the **v5 Bright White & Pine design system** — a bright near-white ground (`FCFCFA`), one deep-pine accent (`12564A`), espresso-INK (`1A1A1A`) text, a per-deck display font (default Charter) paired with Manrope body, emphasis carried by hairlines and type weight rather than coloured bars, pptx-first delivery. The system was built to strip patterns now widely read as AI-design tells — warm cream grounds, a single font everywhere, one-side accent bars, eyebrow pills, oversized section numerals. The anti-slop posture is part of the DNA: see `references/anti-slop.md` (the "slop" catalogue mapped to deck relevance) and the static checks in `scripts/deck_qa.js`.
 
