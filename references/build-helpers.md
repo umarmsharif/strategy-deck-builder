@@ -1140,7 +1140,7 @@ const ix=6.0,iy=4.7; s.addShape(pres.ShapeType.ellipse,{x:ix-0.62,y:iy-0.5,w:1.2
 ```js
 const cx=4.2,cy=4.6,rings=[{r:2.0,fill:TINT,bd:TINT_BORDER},{r:1.38,fill:PANEL,bd:LINE},{r:0.78,fill:ACCENT,bd:ACCENT}];
 rings.forEach(o=>s.addShape(pres.ShapeType.ellipse,{x:cx-o.r,y:cy-o.r,w:2*o.r,h:2*o.r,fill:{color:o.fill},line:{color:o.bd,pt:1}}));
-// centre label WH; outer ring labels at (cx, cy-r+pad) centred; right column = 3 rows aligned to ring order
+// centre label ON_ACCENT (dark text on the accent core); outer ring labels at (cx, cy-r+pad) centred; right column = 3 rows aligned to ring order
 ```
 **Common defects:** draw order = z-order — paint outer first or it hides the inner rings. Ring labels inside thin bands collide; put all but the centre at the top arc or in the right column.
 **Variants:** 2 or 4 rings; concentric *squares* = `nested-containers` (2.45) when the relation is containment, not distance.
@@ -1167,7 +1167,7 @@ const cx=6.4,cy=4.85,Rx=3.05,Ry=1.78,hubR=0.95,pillW=1.95,pillH=0.62,nodes=[/* �
 const pts=nodes.map((_,i)=>{const a=(-90+i*360/nodes.length)*Math.PI/180; return {x:cx+Rx*Math.cos(a),y:cy+Ry*Math.sin(a)};});
 pts.forEach(p=>connector(s,cx,cy,p.x,p.y,TINT_BORDER,0.03));
 s.addShape(pres.ShapeType.ellipse,{x:cx-hubR,y:cy-hubR,w:2*hubR,h:2*hubR,fill:{color:ACCENT},line:{color:ACCENT}});
-pts.forEach((p,i)=>{s.addShape(pres.ShapeType.roundRect,{x:p.x-pillW/2,y:p.y-pillH/2,w:pillW,h:pillH,rectRadius:0.08,fill:{color:WH},line:{color:LINE,pt:1}}); /* + centred label */});
+pts.forEach((p,i)=>{s.addShape(pres.ShapeType.roundRect,{x:p.x-pillW/2,y:p.y-pillH/2,w:pillW,h:pillH,rectRadius:0.08,fill:{color:PANEL},line:{color:LINE,pt:1}}); /* + centred label, INK */});  // pills PANEL (not WH) so they read on dark; hub label ON_ACCENT
 ```
 **Common defects:** a CIRCULAR layout (Rx=Ry) either overruns the headline (top node) or collides side pills with the hub — use an ellipse (Rx>Ry). Keep the top node's top edge ≥ 2.6.
 **Variants:** label the spokes (flow direction) for a process hub; 4–7 dependents.
@@ -1180,7 +1180,7 @@ const coreX=6.65,coreY=4.6,inX=2.55,outX=10.75,pw=3.0,ph=0.62,inY=[3.35,4.6,5.85
 inY.forEach(y=>connector(s,inX+pw/2,y,coreX-0.62,coreY,TINT_BORDER,0.028));
 outY.forEach(y=>connector(s,coreX+0.62,coreY,outX-pw/2,y,TINT_BORDER,0.028));
 s.addShape(pres.ShapeType.diamond,{x:coreX-0.85,y:coreY-0.85,w:1.7,h:1.7,fill:{color:ACCENT},line:{color:ACCENT}});
-// + input pills PANEL/left, output pills WH/right, "INPUTS"/"OUTCOMES" tracked-caps over each column
+// + core label ON_ACCENT; input pills PANEL (LINE border)/left, output pills PANEL (ACCENT border)/right; "INPUTS"/"OUTCOMES" tracked-caps over each column
 ```
 **Common defects:** connectors must originate at the core's edge (±0.62), not its centre, or they poke through the diamond. 3×3 is the clean default.
 **Variants:** asymmetric (1→many = divergence only; many→1 = use `source-to-destination-diagram` 2.20).
@@ -1203,7 +1203,7 @@ steps.forEach((st,i)=>{const h=1.0+i*0.82,x=x0+i*(sw+gap),y=base-h,top=i===steps
 ```js
 const x0=3.3,y0=2.9,cw=2.55,ch=1.12,cells=[[/*row0*/],[/*row1*/],[/*row2*/]];
 for(let r=0;r<3;r++)for(let c=0;c<3;c++){const star=(r===0&&c===2);
-  s.addShape(pres.ShapeType.rect,{x:x0+c*cw,y:y0+r*ch,w:cw,h:ch,fill:{color:star?TINT:(r+c>=3?PANEL:WH)},line:{color:star?ACCENT:LINE,pt:star?1.25:1}}); /* centred label */}
+  s.addShape(pres.ShapeType.rect,{x:x0+c*cw,y:y0+r*ch,w:cw,h:ch,fill:{color:star?TINT:(r+c>=3?PANEL:SURFACE)},line:{color:star?ACCENT:LINE,pt:star?1.25:1}}); /* centred label */}  // plain cells SURFACE (not WH) so they sit on a dark ground too
 // axes: "POTENTIAL ↑" left of grid, "PERFORMANCE →" below — horizontal, not rotated
 ```
 **Common defects:** rotated axis text renders buggy in LibreOffice — keep axis labels horizontal with glyph arrows. Colour only the one focus cell or the routing is lost.
@@ -1221,12 +1221,12 @@ s.addChart(pres.ChartType.radar,data,{x:0.7,y:2.55,w:7.4,h:4.3,radarStyle:"stand
 
 ### 2.44 Pros / cons ledger
 **When:** a two-sided weighing that must end in a stated call — build vs buy, go vs hold.
-**Anatomy:** two columns split by a hairline, each item led by a small semantic chip (`G` "+" / `R` "−"); a full-width INK verdict strip at the bottom with the call, ACCENT keyword. Semantic green/red is the rare allowed extra colour — meaning, not decoration.
+**Anatomy:** two columns split by a hairline, each item led by a small semantic chip (`G` "+" / `R` "−"); a full-width `STRIP` verdict strip (`ON_STRIP` text) at the bottom with the call. Semantic green/red is the rare allowed extra colour — meaning, not decoration.
 ```js
 const colW=5.55,lx=0.8,rx=7.0,hy=2.75,iy=3.45,rh=0.66;
 s.addShape(pres.ShapeType.rect,{x:6.665,y:hy,w:0.012,h:3.1,fill:{color:LINE},line:{color:LINE}});
 function mark(s,x,y,sym,col){s.addShape(pres.ShapeType.ellipse,{x,y,w:0.3,h:0.3,fill:{color:col},line:{color:col}}); s.addText(sym,{x,y:y-0.01,w:0.3,h:0.3,fontSize:14,bold:true,color:WH,fontFace:FONT,align:"center",valign:"middle"});}
-// pros → mark(...,"+",G); cons → mark(...,"–",R); INK verdict strip at y=6.25 with ACCENT keyword
+// pros → mark(...,"+",G); cons → mark(...,"–",R); STRIP verdict strip at y=6.25, ON_STRIP text (inverts to a light bar on dark themes)
 ```
 **Common defects:** without the verdict strip this is just a list — the call is the point. Don't let either column run past x≈12.6.
 **Variants:** add a weight/score per row; three columns (keep/drop/defer).
@@ -1235,7 +1235,7 @@ function mark(s,x,y,sym,col){s.addShape(pres.ShapeType.ellipse,{x,y,w:0.3,h:0.3,
 **When:** strict subset / containment — TAM·SAM·SOM, scope rings (market→segment→target), in-scope vs out-of-scope.
 **Anatomy:** concentric `rect`s, outer→inner, each labelled top-left with its value; the innermost (the obtainable/target) takes `TINT` + ACCENT; a one-line "what the number must defend" caption below.
 ```js
-const levels=[{x:2.45,y:2.85,w:8.45,h:3.7,fill:WH,bd:LINE,lab:"TAM · TOTAL",val:"$4.2B",tc:INK},{x:3.35,y:3.45,w:6.65,h:2.5,fill:PANEL,bd:LINE,lab:"SAM",val:"$900M",tc:INK},{x:4.55,y:4.05,w:4.25,h:1.3,fill:TINT,bd:ACCENT,lab:"SOM",val:"$120M",tc:ACCENT}];
+const levels=[{x:2.45,y:2.85,w:8.45,h:3.7,fill:SURFACE,bd:LINE,lab:"TAM · TOTAL",val:"$4.2B",tc:INK},{x:3.35,y:3.45,w:6.65,h:2.5,fill:PANEL,bd:LINE,lab:"SAM",val:"$900M",tc:INK},{x:4.55,y:4.05,w:4.25,h:1.3,fill:TINT,bd:ACCENT,lab:"SOM",val:"$120M",tc:ACCENT}];  // outer ring SURFACE (not WH) for dark themes
 levels.forEach((L,i)=>{s.addShape(pres.ShapeType.rect,{x:L.x,y:L.y,w:L.w,h:L.h,fill:{color:L.fill},line:{color:L.bd,pt:i===2?1.25:1}}); /* label top-left + value top-right */});
 ```
 **Common defects:** inset each level ≥ 0.5" so labels don't collide; right-align the value so it never sits on the inner box's border.
