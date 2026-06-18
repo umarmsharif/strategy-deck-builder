@@ -108,6 +108,7 @@ const DISPLAY_BOLD = T.displayBold, FONT = "Manrope";
 - emphasis bar / table or tier header / dark card / decision node → `fill: STRIP`, text `ON_STRIP`. (Light themes: near-black bar, white text. Dark themes: it inverts to a light bar with dark text.)
 - anything filled with `ACCENT` → primary text `ON_ACCENT`, secondary text `ON_ACCENT_MUTE` (white on the dark accents; dark on Ink's teal and Midnight's gold).
 - muted / secondary bars → `MUTEFILL`, not a hardcoded grey.
+- a *semantic* colour (`G`/`A`/`R`) used as a large fill (a coloured cell, lane, or bar) → pick its text colour white-or-dark by that colour's own luminance, NOT `ON_ACCENT` (which is tuned to the theme accent). White reads on `R`/`A`; on the darker `G` use white too. Reserve `ON_ACCENT` for fills that are the theme `ACCENT`.
 
 `INK` as *text* stays `INK`. On light themes these tokens equal the old values, so existing decks render identically — only the dark themes diverge. Wherever a recipe below still reads "INK fill / WH text", translate it through this rule.
 
