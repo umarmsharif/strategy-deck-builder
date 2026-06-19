@@ -69,6 +69,11 @@ Density tags remain useful as metadata for Claude's recommendation step — know
 | `radar-profile` | medium | compare | radial | diagnostic, recommendation | extended |
 | `pros-cons-ledger` | light | compare | column | recommendation, pitch | extended |
 | `nested-containers` | light | decompose | rings | market-entry, diagnostic | extended |
+| `horizontal-funnel-row` | light | narrow | row | diagnostic | extended |
+| `two-col-split-narrative` | light | decompose | column | diagnostic, recommendation | extended |
+| `benchmark-comparison-table` | light | compare | grid | diagnostic, recommendation | extended |
+| `synthesis-convergence-insight` | medium | narrow | convergence | diagnostic, inductive | extended |
+| `closing-ask-typographic` | sparse | frame | none | all | extended |
 
 ---
 
@@ -307,6 +312,53 @@ Native radar; subject vs benchmark across 4–8 dimensions.
 Two-sided weighing with semantic +/− chips and an INK verdict strip.
 ### `nested-containers` — light
 Concentric rectangles for strict subset / containment (TAM·SAM·SOM).
+
+## Additional patterns (extended)
+
+### `horizontal-funnel-row` — light
+Five to seven equal-height rectangles arranged left-to-right. Each box shows a stage label and a percentage value. A small text arrow (`▶`) connects adjacent boxes. Drop-off percentage is annotated below each connector in MUTE color; the critical stage (largest drop) gets its connector and box border in R (risk red). Use when the complication slide needs to show where in a sequential funnel the loss concentrates — especially when a single step dominates. The critical stage accent is the only color element; all other boxes stay PANEL.
+
+**Anatomy:** stage boxes (`w≈1.6`, `h≈1.4`, start at `y≈CONTENT_Y+0.4`), arrow text between (`▶`, MUTE or R), drop annotation below connectors (`y≈box_bottom+0.12`), INK-emphasis callout strip naming the critical stage below (`y≈box_bottom+0.6`).
+
+**Do not use:** when the funnel has more than 7 stages (use `milestone-bucket-funnel` for multi-branch funnels), or when the stages are non-sequential.
+
+---
+
+### `two-col-split-narrative` — light
+Left column (40–50% width): a multi-paragraph narrative or analytical explanation in BODY/FONT. Right column (50–60% width): 2–4 stacked data tiles (label + value + delta, each `h≈1.1–1.3`). The left column carries the insight in prose; the right column carries the evidence in numbers. Use on situation or context slides where equal KPI tiles in a row would show the data without explaining what it means.
+
+**Anatomy:** left text block (`x=MX`, `w≈5.8–6.2`, `y=CONTENT_Y+0.1`), gap (`0.3–0.4`), right tiles stacked (`w≈5.5–6.0`), each tile has a 0.03-height color rule at top (G for positive, R for negative), label in MUTE tracked caps, value in DISPLAY, delta in body font with color.
+
+**Do not use:** when the narrative is under 50 words (use stat-row instead), or when there are more than 4 KPI tiles (use metric-dashboard).
+
+---
+
+### `benchmark-comparison-table` — light
+A four-column table: Metric | Company value | Benchmark | Gap. ACCENT fill header row with WH text. Data rows alternate PANEL/WH fills. Company and benchmark values in DISPLAY font sized 22–26pt; gap column color-coded R (red) for shortfall, G (green) for outperformance. Use when the finding is specifically about performance relative to an external standard — GSMA benchmarks, category medians, prior period comparisons. Three to five data rows is the sweet spot; beyond five, use multi-axis-metric-table.
+
+**Anatomy:** header (`h≈0.38`, ACCENT fill), data rows (`h≈0.68–0.74`), total table width = `W - 2*MX`. Column widths: metric label 35%, company 21%, benchmark 21%, gap 23%. Contextual callout (tintStrip) below the table at `y≈table_bottom+0.2` restating the key implication.
+
+**Do not use:** when comparing more than two entities (use three-col-comparison for A/B/C), or when the gap column would be meaningless (use stat-row).
+
+---
+
+### `synthesis-convergence-insight` — medium
+An INK-emphasis banner (full slide width, `h≈1.0–1.1`) stating the root cause or unifying thesis. Below it: three mechanism cards showing how each finding connects to the root. Each card has a colored top rule, a gap label in tracked caps, a short bold headline naming the missing mechanism, a hairline divider, and a 2–3 sentence consequence explanation. Use as the synthesis slide in any inductive deck with 2+ findings — it bridges from "here are the problems" to "here is what they share" before the recommendation lands.
+
+**Anatomy:** INK strip (`y=CONTENT_Y`, `h≈1.06`), three cards below (`y≈CONTENT_Y+1.22`, `h≈3.0`), each card structured as: colored top rule (0.04h) → gap label (tracked caps MUTE) → missing-mechanism headline (DISPLAY 13–15pt INK) → hairline → consequence paragraph (FONT 10pt BODY).
+
+**This is the "so what ties it together" slide. Never skip it in an inductive deck with 3+ findings.** The INK strip is mandatory — pine-tint makes it read as a contextual note rather than a structural conclusion.
+
+**Do not use:** when there is only one finding (skip straight to recommendation), or in diagnostic and BLUF archetypes where the answer is stated upfront.
+
+---
+
+### `closing-ask-typographic` — sparse
+Dark ACCENT-fill slide. Large DISPLAY text (48–60pt) states the ask in 6–10 words, left-aligned. One italic DISPLAY return line below (18–22pt, ON_ACCENT_MUTE) carries the three key figures (investment · return · payback). A short ACCENT_DK rule (`w≈3–4"`) separates the return line from a one-sentence Manrope resolution. No cards, no breakdown tables. Use when the ask is simple enough to state in one sentence and the supporting math fits in one line — typically C-suite decks or boards where data has already been established in prior slides.
+
+**Anatomy:** slide background ACCENT fill, breadcrumb in TINT_BORDER tracked caps, ask text (`y≈1.2`, DISPLAY 52–60pt, ON_STRIP), return line (`y≈3.9`, DISPLAY italic 18pt, ON_ACCENT_MUTE), thin rule (`y≈4.6`, `w≈4.0`, ACCENT_DK), resolution (`y≈4.75`, FONT 12–13pt, TINT), footer in TINT_BORDER.
+
+**Alternative to `closing-ask` (card-based):** use `closing-ask` when the ask requires a visible breakdown (multiple asks, phased investments, named owners). Use `closing-ask-typographic` when one sentence does the job.
 
 ## Extending the catalog
 

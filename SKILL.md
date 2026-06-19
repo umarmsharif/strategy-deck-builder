@@ -38,6 +38,16 @@ After reading, hold these constraints while drafting copy:
 
 Structural craft can be perfect and the deck still gets discounted the moment the prose reads as generic consulting-AI. This gate exists to stop that.
 
+**Prose discipline (enforce on every slide):**
+
+The single most common prose failure is hedging that turns a direct finding into a vague observation. Before delivering any slide copy, check every action title and context line against this test: could a skeptical reader say "that's just noise"? If yes, rewrite.
+
+- Replace: "The diagnostic surfaces compounding leaks across the funnel." → Write: "Three gaps cost PKR 47M per quarter."
+- Replace: "Transaction frequency indicates a potential habit-formation gap." → Write: "Users transact 2.4× less than peers despite giving the product an NPS of +42."
+- Replace: "There is an opportunity to improve KYC completion." → Write: "KYC completion at 29% is an engineering failure, not a user problem."
+
+The pattern: name the number, name the gap, name the mechanism. Drop the qualifier.
+
 ### Step 1 — Brief the deck
 
 Use `AskUserQuestion` (or ask inline where the tool is unavailable) with two back-to-back calls before writing a single slide or line of build.js:
@@ -183,6 +193,62 @@ Before writing any pptxgenjs code, confirm the component for each slide:
 ### Step 5 — Write build.js (pptxgenjs)
 
 Write a Node.js script that constructs the deck programmatically using pptxgenjs. Open `assets/reference-build.js` as the worked exemplar and use `references/build-helpers.md` as the recipe reference throughout. Install the dependency once: `npm install pptxgenjs`.
+
+**MANDATORY — copy helpers verbatim, do not re-implement:**
+
+Before writing a single line of slide code, open `assets/reference-build.js` and copy the five helper functions (`header`, `title`, `footer`, and the two strip helpers `inkStrip` / `tintStrip`) into your `build.js` verbatim. Do not write your own implementations. This is non-negotiable because:
+
+- Every coordinate in those functions is load-bearing (`MX=0.533`, `breadcrumb y=0.42`, `hairline y=0.80`, `context y=1.0`, `headline y=1.4`). A model that re-implements them from memory consistently gets at least two of these wrong.
+- The most common regression is placing a full-width accent band at `y=0` and the breadcrumb at `y=0.10`. This is the v4 anatomy — it was explicitly stripped in v5 as an AI-design tell. The header hairline at `y=0.80` is the ONLY rule in the upper zone.
+- `inkStrip()` and `tintStrip()` use `STRIP`/`ON_STRIP` tokens, not hardcoded colors, so they work correctly across all 8 themes without modification. A hand-written strip almost always hardcodes `INK`/`WH`, which inverts incorrectly on dark themes.
+
+If `reference-build.js` is not accessible in the current environment, paste the helpers from `references/build-helpers.md` §3. If that is also unavailable, use the verbatim fallback below.
+
+<details><summary>Verbatim helpers (fallback — use reference-build.js if available)</summary>
+
+```js
+const rect = pres.ShapeType.rect;
+const fillLine = (c) => ({ color: c });   // same-colour line = no visible border
+const MX = 0.533, CW = 12.267;            // left margin + content width (right edge 12.8)
+
+function header(s, breadcrumb, num, total) {
+  s.background = { color: SURFACE };
+  s.addText(breadcrumb, { x: MX, y: 0.42, w: 8, h: 0.3, fontSize: 10.7, bold: true,
+    color: ACCENT, charSpacing: 3, fontFace: FONT, valign: "middle" });
+  s.addText(`${num} / ${total}`, { x: 10.9, y: 0.42, w: 1.9, h: 0.3, fontSize: 10.7,
+    color: MUTE, fontFace: FONT, align: "right", valign: "middle" });
+  s.addShape(rect, { x: MX, y: 0.8, w: CW, h: 0.013, fill: fillLine(LINE), line: fillLine(LINE) });
+}
+function title(s, context, headline) {
+  if (context) s.addText(context, { x: MX, y: 1.0, w: CW, h: 0.34, fontSize: 13.7,
+    italic: true, color: ACCENT, fontFace: FONT });
+  s.addText(headline, { x: MX, y: 1.4, w: CW, h: 0.95, fontSize: 30, bold: DISPLAY_BOLD,
+    color: INK, fontFace: DISPLAY, valign: "top" });
+}
+function footer(s, note, label) {
+  s.addShape(rect, { x: MX, y: 7.05, w: CW, h: 0.012, fill: fillLine(LINE), line: fillLine(LINE) });
+  if (note) s.addText(note, { x: MX, y: 7.08, w: 8.5, h: 0.3, fontSize: 9.5,
+    italic: true, color: MUTE, fontFace: FONT, valign: "middle" });
+  s.addText(label, { x: 8.3, y: 7.08, w: 4.5, h: 0.3, fontSize: 10,
+    color: MUTE, fontFace: FONT, align: "right", valign: "middle" });
+}
+// inkStrip — PRIMARY takeaway (the "so what", the answer, the root cause). Dark fill = remember this.
+function inkStrip(s, text, x, y, w, h, sz = 13) {
+  s.addShape(rect, { x, y, w, h, fill: { color: STRIP }, line: { color: STRIP, width: 0 } });
+  s.addText(text, { x: x + 0.22, y, w: w - 0.44, h, fontFace: DISPLAY, fontSize: sz,
+    bold: DISPLAY_BOLD, color: ON_STRIP, valign: "middle", lineSpacingMultiple: 1.2 });
+}
+// tintStrip — SECONDARY/CONTEXTUAL callout (implementation, caveats, legends). Never the key message.
+function tintStrip(s, text, x, y, w, h, sz = 10) {
+  s.addShape(rect, { x, y, w, h, fill: { color: TINT }, line: { color: TINT_BORDER, width: 0.5 } });
+  s.addText(text, { x: x + 0.22, y: y + 0.1, w: w - 0.44, h: h - 0.2, fontFace: FONT,
+    fontSize: sz, color: ACCENT_DK, lineSpacingMultiple: 1.3, valign: "middle" });
+}
+```
+
+These require the per-theme token constants (`SURFACE`, `INK`, `BODY`, `MUTE`, `LINE`, `PANEL`, `ACCENT`, `ACCENT_DK`, `TINT`, `TINT_BORDER`, `STRIP`, `ON_STRIP`, `DISPLAY`, `DISPLAY_BOLD`, `FONT`) defined above — pull the full set for the chosen theme from `references/design_system.md` §1. The strips use `STRIP`/`ON_STRIP`, so they invert correctly on the dark themes.
+
+</details>
 
 **Every build.js must open with the design token constants and the three helper functions:**
 

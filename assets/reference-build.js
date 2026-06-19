@@ -81,6 +81,30 @@ function footer(s, note, num) {
     fontSize: 10, color: MUTE, fontFace: FONT, align: "right", valign: "middle" });
 }
 
+// inkStrip — PRIMARY takeaway strip (the "so what", the answer, the root cause)
+// Use for: exec summary answer banner, synthesis insight, key finding callout
+// NEVER use pine-tint here. The dark fill signals that this is the message to remember.
+function inkStrip(s, text, x, y, w, h, sz = 13) {
+  s.addShape(rect, { x, y, w, h, fill: { color: STRIP }, line: { color: STRIP, width: 0 } });
+  s.addText(text, {
+    x: x + 0.22, y, w: w - 0.44, h,
+    fontFace: DISPLAY, fontSize: sz, bold: DISPLAY_BOLD,
+    color: ON_STRIP, valign: "middle", lineSpacingMultiple: 1.2
+  });
+}
+
+// tintStrip — SECONDARY/CONTEXTUAL callout (implementation details, caveats, supporting context)
+// Use for: implementation windows, data caveats, legends, destination panels
+// NEVER use for the key message — it reads as supporting noise when the answer needs to land.
+function tintStrip(s, text, x, y, w, h, sz = 10) {
+  s.addShape(rect, { x, y, w, h, fill: { color: TINT }, line: { color: TINT_BORDER, width: 0.5 } });
+  s.addText(text, {
+    x: x + 0.22, y: y + 0.1, w: w - 0.44, h: h - 0.2,
+    fontFace: FONT, fontSize: sz,
+    color: ACCENT_DK, lineSpacingMultiple: 1.3, valign: "middle"
+  });
+}
+
 // ── 1. Title bookend ────────────────────────────────────────────────────────
 (() => {
   const s = pres.addSlide();
