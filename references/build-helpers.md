@@ -1308,6 +1308,19 @@ function addCallout(s, x, y, num, title, body) {
   s.addText(title, { x: x+0.733, y: y+0.053, w: 3.067, h: 0.333, fontSize: 13.3, bold: true, color: "1A1A1A", fontFace: "Manrope" });
   s.addText(body,  { x: x+0.24, y: y+0.427, w: 3.533, h: 0.573, fontSize: 10.7, color: "45474A", fontFace: "Manrope" });
 }
+// inkStrip — PRIMARY takeaway strip (the "so what", the answer, the root cause). The dark fill says "remember this".
+// Use for: exec-summary answer banner, synthesis insight, key finding callout. NEVER pine-tint the primary message.
+function inkStrip(s, text, x, y, w, h, sz = 13) {
+  s.addShape(pres.ShapeType.rect, { x, y, w, h, fill: { color: STRIP }, line: { color: STRIP, width: 0 } });
+  s.addText(text, { x: x + 0.22, y, w: w - 0.44, h, fontFace: DISPLAY, fontSize: sz,
+    bold: DISPLAY_BOLD, color: ON_STRIP, valign: "middle", lineSpacingMultiple: 1.2 });
+}
+// tintStrip — SECONDARY/CONTEXTUAL callout (implementation windows, caveats, legends, destination panels). Never the key message.
+function tintStrip(s, text, x, y, w, h, sz = 10) {
+  s.addShape(pres.ShapeType.rect, { x, y, w, h, fill: { color: TINT }, line: { color: TINT_BORDER, width: 0.5 } });
+  s.addText(text, { x: x + 0.22, y: y + 0.1, w: w - 0.44, h: h - 0.2, fontFace: FONT, fontSize: sz,
+    color: ACCENT_DK, lineSpacingMultiple: 1.3, valign: "middle" });
+}
 ```
 
 ---
