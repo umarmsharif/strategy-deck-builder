@@ -204,6 +204,8 @@ This rule applies specifically to full-width panels in source-to-destination lay
 
 **The documented patterns below are a starting point, not a cage.** When a slide brief calls for visual density that the existing patterns produce sparsely, invent a new pattern. When content is quantitative, default to chart-driven layouts even when a stat-row or table pattern would be the closest documented match. The library's job is to encode safety and consistency for repeat patterns; it does NOT impose a fixed vocabulary on novel content.
 
+**Components compose; mix them within a slide.** Primitives, charts, tables, and callout strips are one toolkit, not mutually exclusive full-slide choices. Pick the right component for each *element* of a slide, and place more than one on a slide when a single message needs them: a benchmark bar beside a positioning-spectrum read-out, a chart under an `inkStrip` takeaway, a primitive next to a stat tile. Switch between a primitive and a chart by the chart-selection-guide test (numbers, use a chart; relationship, use a primitive). The only limits are the ones that always apply: one message per slide, the accent scalpel (one eye-landing element), every band carries data. Fluid mixing, never clutter.
+
 **When to break out of documented patterns:**
 
 - **Quantitative content, multiple data points.** Default to chart (line, bar, scatter, heatmap, waterfall, cascade) over stat cards. Slide 1 of every deck especially: the action title plus a workhorse chart pattern (small-multiples, dual-axis, three-trajectory) trains the reader's density expectation for the rest of the deck.
